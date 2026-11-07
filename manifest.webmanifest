@@ -1,0 +1,17 @@
+{
+  "name": "Barra & Chão — Calistenia e TAF",
+  "short_name": "Barra & Chão",
+  "description": "Treinos de calistenia, circuito militar, desafios e simulado TAF 100% offline com animações 2D e 3D.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#141612",
+  "theme_color": "#2C361D",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" },
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

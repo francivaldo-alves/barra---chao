@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#2C361D">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Barra &amp; Chão</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="preload" href="styles/fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="styles/fonts/big-shoulders-display.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles/variables.css">
+  <link rel="stylesheet" href="styles/base.css">
+  <link rel="stylesheet" href="styles/workout.css">
+  <link rel="stylesheet" href="styles/modals.css">
+</head>
+<body>
+
+<div class="wrap">
+  <header class="appbar">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 40 40" aria-hidden="true">
+        <rect width="40" height="40" rx="11" fill="#2C361D"/>
+        <rect x="0.5" y="0.5" width="39" height="39" rx="10.5" fill="none" stroke="#56653A"/>
+        <rect x="8" y="8.5" width="24" height="3.4" rx="1.7" fill="#F2BE2E"/>
+        <rect x="10" y="11.5" width="2.2" height="4" rx="1" fill="#F2BE2E"/>
+        <rect x="27.8" y="11.5" width="2.2" height="4" rx="1" fill="#F2BE2E"/>
+        <polyline points="11,20 20,25.5 29,20" fill="none" stroke="#EDE7D3" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round"/>
+        <polyline points="11,26.5 20,32 29,26.5" fill="none" stroke="#EDE7D3" stroke-width="3.3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>
+      </svg>
+      <div class="wm">Barra <i>&amp;</i> Chão</div>
+    </div>
+    <button class="iconbtn" id="opensettings" type="button" aria-label="Ajustes do treino" aria-expanded="false" aria-controls="settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h10M18 7h2M4 17h4M12 17h8"/>
+        <circle cx="16" cy="7" r="2.2"/>
+        <circle cx="10" cy="17" r="2.2"/>
+      </svg>
+    </button>
+  </header>
+
+  <button class="summary" id="summary" type="button"></button>
+
+  <section class="profile" id="settings" aria-label="Ajustes do treino" hidden>
+    <div class="settings-top">
+      <h2>Ajustes do treino</h2>
+      <button class="close" id="closesettings" type="button" aria-label="Fechar ajustes">×</button>
+    </div>
+    <div class="row"><span class="label">Nível</span><div class="seg" id="nivel"></div></div>
+    <div class="row"><span class="label">Objetivo</span><div class="seg" id="objetivo"></div></div>
+    <div class="row"><span class="label">Dias por semana</span><div class="seg" id="dias"></div></div>
+    <div class="row"><span class="label">Intensidade</span><div class="seg" id="intens"></div><p class="hint" id="intens-hint"></p></div>
+    <div class="row"><span class="label">Tempo disponível por treino</span><div class="seg" id="dur"></div></div>
+    <div class="row"><span class="label">Formato</span><div class="seg" id="formato"></div></div>
+    <div class="row"><span class="label">Faixa etária</span><div class="seg" id="idade"></div></div>
+    <div class="row"><span class="label">Cuidados especiais</span><div class="seg" id="restr"></div><p class="hint">O app troca sozinho os exercícios não indicados para cada cuidado.</p></div>
+    <div class="row"><label class="label" for="peso">Peso (kg), para estimar calorias</label><input id="peso" type="number" inputmode="numeric" min="30" max="250" class="num-in"></div>
+    <div class="row"><span class="label">Voz do treinador</span><div class="seg" id="voz"></div></div>
+    <div class="row" id="motorrow" hidden><label class="label" for="motorsel">Mecanismo de voz</label><select id="motorsel" class="num-in voz-full"></select><p class="hint">Cada mecanismo (Samsung, Google…) tem as próprias vozes. Escolha aqui o que tem a voz que você quer.</p></div>
+    <div class="row"><label class="label" for="vozsel">Timbre da voz</label><div class="voz-pick"><select id="vozsel" class="num-in"></select><button class="ghost" id="voztest" type="button">Testar</button></div><div class="voz-pick" id="vozbaixar" hidden><button class="ghost" id="vozinstall" type="button">Baixar mais vozes</button><button class="ghost" id="vozconfig" type="button">Configurações de voz</button></div><p class="hint">Ouça cada uma em "Testar". Vozes marcadas "baixar" ainda não estão no celular: escolha uma (com internet o Google costuma baixar sozinho) ou toque em "Baixar mais vozes" e baixe Português (Brasil); ao voltar, a lista se atualiza. As vozes "online" do Google soam mais naturais, mas precisam de internet; as "offline" funcionam sempre.</p></div>
+    <div class="row"><span class="label">Tom da voz</span><div class="seg" id="tom"></div></div>
+    <div class="row"><span class="label">Metrônomo de ritmo</span><div class="seg" id="ritmo"></div></div>
+    <p class="hint">Este app orienta treinos para pessoas liberadas para atividade física. Ele não substitui a avaliação presencial de um profissional de educação física ou de um médico. Sentiu dor no peito, tontura ou falta de ar fora do normal? Pare e procure atendimento.</p>
+    <div class="footer-actions">
+      <button class="ghost" id="newweek" type="button">Zerar progresso da semana</button>
+      <button class="ghost" id="resetlv" type="button">Voltar progressões ao padrão</button>
+    </div>
+  </section>
+
+  <nav class="week" id="week" role="tablist" aria-label="Dias da semana"></nav>
+  <main id="session"></main>
+
+  <section aria-label="Desafios">
+    <div class="sec-title"><h3>Desafios</h3><span>um pouco mais a cada dia</span></div>
+    <div class="chal-row" id="chal"></div>
+  </section>
+
+  <div class="actions">
+    <button class="big" id="openlib" type="button">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4" y="4" width="7" height="7" rx="2"/>
+          <rect x="13" y="4" width="7" height="7" rx="2"/>
+          <rect x="4" y="13" width="7" height="7" rx="2"/>
+          <rect x="13" y="13" width="7" height="7" rx="2"/>
+        </svg>
+      </span>
+      <span>Biblioteca<small id="libcount"></small></span>
+    </button>
+    <button class="big" id="opentaf" type="button">
+      <span class="ico">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="13.5" r="7"/>
+          <path d="M12 13.5V10M10 3h4M18 7l1.5-1.5"/>
+        </svg>
+      </span>
+      <span>Simulado TAF<small>Flexão e abdominal, 1 min cada</small></span>
+    </button>
+  </div>
+</div>
+
+<div class="sheet" id="sheet" hidden>
+  <div class="panel" id="panel" role="dialog" aria-modal="true"></div>
+</div>
+
+<div class="timer" id="timer" hidden>
+  <div>
+    <div class="lbl" id="tlbl">Descanso</div>
+    <div class="t" id="tval">0:00</div>
+  </div>
+  <div style="display:flex;gap:6px">
+    <button class="sec2" id="tplus" type="button">+15 s</button>
+    <button id="tskip" type="button">Pular</button>
+  </div>
+</div>
+
+<script src="vendor/three.min.js"></script>
+<script src="vendor/GLTFLoader.js"></script>
+<script type="module" src="src/main.js"></script>
+
+</body>
+</html>
