@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "echo build sem dependencias",
+  "buildCommand": "node scripts/build-web.mjs",
+  "outputDirectory": "www",
+  "headers": [
+    {
+      "source": "/(sw.js|index.html|manifest.webmanifest)",
+      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+    }
+  ]
+}

@@ -84,4 +84,4 @@ Depois de mudar qualquer arquivo do app, rode `npm run cap:sync` antes de gerar 
 Para publicar na Play Store, gere um AAB assinado (**Build › Generate Signed Bundle**). Guarde a chave (`.jks`) e as senhas fora da pasta do projeto, com backup: sem ela não dá para publicar atualizações.
 
 ### Opção 2: Instalar direto como PWA Offline no Android
-Rode `npm run build` e sirva a pasta `www/` em qualquer servidor estático (ex.: `npx serve www` ou GitHub Pages / Netlify) e abra no Chrome do Android. Toque em **"Adicionar à tela inicial / Instalar aplicativo"**. O Service Worker (`sw.js`) fará o cache de todos os módulos e do modelo 3D para rodar 100% offline.
+Rode `npm run build` e sirva a pasta `www/` em qualquer servidor estático (ex.: `npx serve www`, GitHub Pages, Netlify ou Vercel; na Vercel o `vercel.json` já faz o build e publica `www/` sozinho) e abra no Chrome do Android. Toque em **"Adicionar à tela inicial / Instalar aplicativo"**. O Service Worker (`sw.js`) fará o cache de todos os módulos e do modelo 3D para rodar 100% offline.
