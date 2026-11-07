@@ -1,0 +1,121 @@
+/* Variáveis de tema (claro/escuro), tipografia e safe-area para Android */
+
+/* Fontes dentro do app (funciona offline; licença SIL OFL em styles/fonts/). Só o subconjunto latin, que cobre o português. */
+@font-face {
+  font-family: "Big Shoulders Display";
+  font-style: normal;
+  font-weight: 700 800;
+  font-display: swap;
+  src: url("fonts/big-shoulders-display.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/barlow-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/barlow-500.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/barlow-600.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Barlow";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/barlow-700.woff2") format("woff2");
+}
+
+:root {
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+
+  --bg: #E6E9E3;
+  --surface: #F6F7F3;
+  --ink: #171A15;
+  --muted: #5A6155;
+  --line: #CBD1C4;
+  --accent: #E3A814;
+  --on-accent: #171A15;
+  --hi: #C98A00;
+  --done: #2C7A57;
+  --soft: #DCE1D6;
+  --prop: #B1B9A9;
+  --err: #B4442F;
+  --olive: #4B5A2E;
+
+  /* Paleta humana realista do personagem 2D (pele com subtom quente, short tático com cós/faixa e tênis com sola) */
+  --skin-hi: #E2AA84;
+  --skin: #CF916A;
+  --skin-b: #A86D4B;
+  --skin-deep: #7E4B2F;
+  --shirt: #CF916A;
+  --shirt-b: #A86D4B;
+  --shorts: #2E3821;
+  --shorts-b: #1F2616;
+  --shorts-waist: #171C10;
+  --shorts-trim: #E3A814;
+  --shoe: #252922;
+  --shoe-b: #171A15;
+  --shoe-sole: #E8E6DC;
+  --hair: #1A120B;
+  --hair-hi: #38271B;
+  --lip: #8E4A39;
+  --outline: rgba(25, 15, 10, 0.34);
+  --muscle: #C8352A;
+
+  /* Fontes com fallback nativo Android (Roboto / sans-serifcondensed) para 100% offline */
+  --display: "Big Shoulders Display", "Roboto Condensed", "Arial Narrow", Impact, sans-serif;
+  --body: "Barlow", "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #141612;
+    --surface: #1D201A;
+    --ink: #ECEEE8;
+    --muted: #9BA294;
+    --line: #2F342A;
+    --accent: #F2BE2E;
+    --on-accent: #141612;
+    --hi: #F2BE2E;
+    --done: #4FB386;
+    --soft: #262A22;
+    --prop: #4A5243;
+    --err: #E8775F;
+    --olive: #A9BC7A;
+    --muscle: #D4402F;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #141612;
+  --surface: #1D201A;
+  --ink: #ECEEE8;
+  --muted: #9BA294;
+  --line: #2F342A;
+  --accent: #F2BE2E;
+  --on-accent: #141612;
+  --hi: #F2BE2E;
+  --done: #4FB386;
+  --soft: #262A22;
+  --prop: #4A5243;
+  --err: #E8775F;
+  --olive: #A9BC7A;
+  --muscle: #D4402F;
+  color-scheme: dark;
+}

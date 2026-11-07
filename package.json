@@ -1,0 +1,25 @@
+{
+  "name": "barra-e-chao",
+  "version": "2.0.0",
+  "description": "App de calistenia, circuito militar e simulado TAF em 2D/3D (Web / Android)",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/anim-check.js",
+    "build": "node scripts/build-web.mjs",
+    "cap:init": "npm run build && cap add android",
+    "cap:icons": "capacitor-assets generate --android --iconBackgroundColor #2C361D --iconBackgroundColorDark #2C361D --splashBackgroundColor #141612 --splashBackgroundColorDark #141612",
+    "cap:sync": "npm run build && cap sync android",
+    "cap:open": "cap open android"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.6.0",
+    "@capacitor/core": "^8.6.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^4.0.0",
+    "@capacitor/cli": "^8.6.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "appId": "br.app.barraechao",
+  "appName": "Barra & Chão",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

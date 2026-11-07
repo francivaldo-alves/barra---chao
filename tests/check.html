@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <title>Teste de Integridade 2D e Anatomia — Barra &amp; Chão</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #141612; color: #ECEEE8; padding: 24px; }
+    .ok { color: #4FB386; font-weight: bold; font-size: 18px; }
+    .err { color: #E8775F; font-weight: bold; }
+    pre { background: #1D201A; padding: 16px; border-radius: 8px; overflow-x: auto; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 20px; }
+    .item { background: #1D201A; border: 1px solid #2F342A; border-radius: 12px; padding: 10px; }
+    .item b { display: block; font-size: 13px; margin-bottom: 6px; color: #F2BE2E; }
+  </style>
+  <link rel="stylesheet" href="../styles/variables.css">
+  <link rel="stylesheet" href="../styles/workout.css">
+</head>
+<body>
+  <h1>Verificação do Motor Cinemático e Anatomia 2D</h1>
+  <div id="out">Executando verificação em todos os movimentos...</div>
+  <div class="grid" id="preview"></div>
+  <script type="module">
+    // Mesmas regras do teste de terminal (anim-rules.js): comprimentos, chão, saltos, amplitude articular e coluna
+    import { ALL, runChecks } from "./anim-rules.js";
+    import { figure, startAnimationLoop } from "../src/engine/figure2d.js";
+
+    const N = 2000, bad = runChecks(N); // o limite de salto entre quadros vale para 2000 quadros
+    const out = document.getElementById("out");
+    if (bad.length) {
+      out.innerHTML = `<p class="err">${bad.length} problemas encontrados:</p><pre>${bad.slice(0, 40).join("\n")}</pre>`;
+    } else {
+      out.innerHTML = `<p class="ok">✓ OK: ${ALL.length} movimentos verificados (${N} quadros cada, incluindo variantes de pegada, outro lado e desenhos só do 2D) — 0 defeitos.</p>`;
+    }
+
+    // Galeria ao vivo de todas as famílias e variantes para inspeção visual rápida
+    const grid = document.getElementById("preview");
+    for (const [k, , nome, opt] of ALL) {
+      const card = document.createElement("div");
+      card.className = "item";
+      card.innerHTML = `<b>${nome}</b><div class="fig"></div>`;
+      card.querySelector(".fig").appendChild(figure(k, { ghost: true, label: nome, ...opt }).node);
+      grid.appendChild(card);
+    }
+    startAnimationLoop();
+  </script>
+</body>
+</html>

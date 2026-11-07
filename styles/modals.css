@@ -1,0 +1,507 @@
+/* Painel inferior (Sheet/Modal), Ficha de exercício, Player de circuito, TAF e Timer fixo */
+.sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(10, 12, 9, 0.55);
+}
+
+.panel {
+  background: var(--surface);
+  color: var(--ink);
+  width: 100%;
+  max-width: 720px;
+  max-height: 92%;
+  overflow-y: auto;
+  border-radius: 16px 16px 0 0;
+  padding: 16px max(16px, env(safe-area-inset-right, 0px)) calc(24px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: grid;
+  gap: 16px;
+}
+
+.panel-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 12px;
+}
+
+.panel h2 {
+  font-size: 32px;
+  font-weight: 800;
+}
+
+.close {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  flex: none;
+}
+
+.stage .fig {
+  cursor: default;
+}
+
+.controls {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.legend {
+  font-size: 13px;
+  color: var(--muted);
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.legend i {
+  display: inline-block;
+  width: 18px;
+  height: 5px;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-right: 5px;
+}
+
+.steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  counter-reset: s;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  gap: 10px;
+  counter-increment: s;
+}
+
+.steps li::before {
+  content: counter(s);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 20px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  display: grid;
+  place-items: center;
+}
+
+.errs {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.errs li {
+  padding-left: 22px;
+  position: relative;
+}
+
+.errs li::before {
+  content: "✕";
+  position: absolute;
+  left: 0;
+  color: var(--err);
+  font-weight: 700;
+}
+
+.tip {
+  background: var(--soft);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.tip.ref {
+  border-left: 3px solid var(--done);
+}
+
+.poses {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(132px, 1fr));
+  gap: 8px;
+}
+
+.pose {
+  display: grid;
+  gap: 6px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+}
+
+.pose img,
+.pose .fig {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.25;
+  object-fit: cover;
+  border-radius: 0;
+  background: radial-gradient(120% 95% at 50% 32%, #77744C 0%, #4A4830 58%, #2E2D1E 100%);
+}
+
+.pose span {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 10px 8px;
+  letter-spacing: 0.02em;
+}
+
+.muscles {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.muscles span {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.prog {
+  display: grid;
+  gap: 6px;
+}
+
+.prog button {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.prog button b {
+  font-family: var(--display);
+  font-size: 18px;
+  width: 22px;
+  flex: none;
+  color: var(--muted);
+}
+
+.prog button[aria-current="true"] {
+  border-color: var(--accent);
+  background: var(--soft);
+}
+
+.sec h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.libgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+
+.tile {
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  border-radius: 10px;
+  padding: 6px;
+  cursor: pointer;
+  display: grid;
+  gap: 6px;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.tile span {
+  padding: 0 4px 4px;
+}
+
+/* Grade de dias do desafio no modal */
+.dgrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.dg {
+  aspect-ratio: 1;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink);
+  font: 800 16px var(--display);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  position: relative;
+  padding: 0;
+}
+
+.dg small {
+  position: absolute;
+  bottom: 3px;
+  font: 600 9px var(--body);
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+
+.dg.rest {
+  border-style: dashed;
+  color: var(--muted);
+}
+
+.dg.done {
+  background: var(--done);
+  border-color: var(--done);
+  color: #fff;
+}
+
+.dg.done small {
+  color: #E6F3EC;
+}
+
+.dg.cur {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+}
+
+.dg.cur small {
+  color: var(--on-accent);
+}
+
+.dg.lock {
+  opacity: 0.45;
+}
+
+.dg[aria-pressed="true"] {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.citem {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 8px;
+}
+
+.citem .fig {
+  border-radius: 10px;
+}
+
+.citem h4 {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 20px;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+
+.citem .amt {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+}
+
+.citem .howto {
+  margin-top: 4px;
+}
+
+.cbtns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Player do circuito / treino guiado */
+.player {
+  display: grid;
+  gap: 12px;
+  text-align: center;
+}
+
+.player .phase {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.player .phase.work { color: var(--done); }
+.player .phase.rest { color: var(--hi); }
+
+.player h3 {
+  font-size: 30px;
+}
+
+.count {
+  font-family: var(--display);
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+
+.pbar {
+  height: 8px;
+  background: var(--soft);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pbar i {
+  display: block;
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.2s linear;
+}
+
+.upnext {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.pctl {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Simulado TAF */
+.taf-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  text-align: left;
+}
+
+.taf-form label {
+  display: grid;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.taf-form input {
+  font: 700 24px var(--body);
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--ink);
+  width: 100%;
+}
+
+.hist {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.hist th,
+.hist td {
+  text-align: left;
+  padding: 6px 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* Timer fixo de descanso */
+.timer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 12px max(16px, env(safe-area-inset-right, 0px)) calc(12px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: space-between;
+  z-index: 15;
+}
+
+.timer .t {
+  font-family: var(--display);
+  font-size: 36px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.timer .lbl {
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+.timer button {
+  font-weight: 700;
+  font-size: 14px;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  cursor: pointer;
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.timer button.sec2 {
+  background: transparent;
+  color: var(--bg);
+  border: 1px solid currentColor;
+}
+
+@media (max-width: 420px) {
+  .wm { font-size: 23px; }
+  .hero h2 { font-size: 34px; }
+  .day b { font-size: 15px; }
+  .day small { font-size: 10px; }
+  .card { grid-template-columns: 108px 1fr; }
+  .card h3 { font-size: 21px; }
+  .count { font-size: 80px; }
+}
